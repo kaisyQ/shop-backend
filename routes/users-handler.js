@@ -6,7 +6,7 @@ const getUsersHandler = async (req, res) => {
     const users = await client.user.findMany()
 
     // if query wasn't success return server error status code
-    if (!user) {
+    if (!users) {
         res.status(500).end()
         return 
     }
@@ -50,7 +50,7 @@ const updateUserHandler = async (req, res, next) => {
         data: {
             login: login != null ? login : undefined,
             password: password != null ? password : undefined,
-            roleId: roleId != null ? roleId : undefined,
+            roleId: roleId != null ? roleId : undefined
         }
     })
 

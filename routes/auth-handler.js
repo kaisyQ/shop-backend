@@ -46,14 +46,11 @@ const signinHandler = async (req, res) => {
         data: {
             token: sessionToken,
             expiresAt: expiresAt,
-            login: login,
             userId: user.id
         }
     })
     res.cookie("session_token", sessionToken, { expires: expiresAt })
-    res.end()
-
-
+    res.status(200).json(user)
 }
 
 

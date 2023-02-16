@@ -1,0 +1,19 @@
+const role = await client.role.create({
+    data: {
+        name: 'admin'
+    }
+})
+
+const role1 = await client.role.create({
+    data: {
+        name: 'user'
+    }
+})
+
+const users = await client.user.create({
+    data: {
+        login: 'admin',
+        password: '12345',
+        roleId: 1
+    }
+})

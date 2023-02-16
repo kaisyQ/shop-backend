@@ -33,8 +33,6 @@ app.use(router)
 
 const start = async () => {
     try {
-        const users = await client.user.findMany()
-        console.log(users)
         app.listen(PORT, () => {
             console.log(`server is listening on PORT: ${PORT}`)
         })

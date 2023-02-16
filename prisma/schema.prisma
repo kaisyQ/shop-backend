@@ -22,13 +22,23 @@ model User {
   password String
   role     Role  @relation(fields: [roleId], references: [id])
   roleId   Int
-  session Session[]
+  session  Session[] 
 }
 
 model Session {
   id        Int      @id @default(autoincrement())
   token     String   @unique
   expiresAt DateTime
-  user User @relation(fields: [userId], references: [id])
-  userId Int
+  user      User @relation(fields: [userId], references: [id])
+  userId    Int
+}
+
+
+
+
+
+model Post {
+  id        Int      @id @default(autoincrement())
+  title String @unique
+  text String @unique
 }
