@@ -22,9 +22,9 @@ router.delete('/logout', logoutHandler)
 // users-routes
 
 
-router.get('/users')
-router.post('/user')
-router.put('/user')
-router.delete('/user')
+router.get('/users', checkMeHandler)
+router.post('/user', checkMeHandler)
+router.put('/user', checkMeHandler)
+router.delete('/user',checkMeHandler)
 
 module.exports = router

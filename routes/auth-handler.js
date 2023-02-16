@@ -46,7 +46,8 @@ const signinHandler = async (req, res) => {
         data: {
             token: sessionToken,
             expiresAt: expiresAt,
-            login: login
+            login: login,
+            userId: user.id
         }
     })
     res.cookie("session_token", sessionToken, { expires: expiresAt })
@@ -76,7 +77,7 @@ const getMeHandler = async (req, res) => {
             role: true
         },
         where: {
-            login: session.login
+            id: session.userId
         },
     })
 
