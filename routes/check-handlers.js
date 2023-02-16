@@ -49,4 +49,40 @@ const checkMeHandler = async (req, res, next) => {
     next()
 }
 
-module.exports = checkMeHandler
+const checkAdminHandler = async (req, res, next) => {
+    // we can ignore cookiesmchecks because this is second midleware function and its start working after all ckecks were passed
+
+    // get cokkies from request 
+    const cookies = req.cookies
+
+    // get token from cookies
+    const token = cookies['session_token']
+
+    // get session info
+    
+    // get full session information
+    const session = await client.session.findFirst({
+        include: {
+            user: true
+        },
+        where: {
+            token: token
+        }
+    })
+
+    // get user from full info
+    const { user } = session
+
+    // if user isn't admin return auth error
+    if (user.roleId !== 1){
+        res.status(401).end()
+        return 
+    }
+    next()
+}
+
+
+
+module.exports = {
+    checkMeHandler, checkAdminHandler
+}
