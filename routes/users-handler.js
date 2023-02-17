@@ -15,6 +15,32 @@ const getUsersHandler = async (req, res) => {
     res.status(200).json(users)
 }
 
+const getUserHandler = async(req, res) => {
+    
+    const { id } = req.params
+    
+    if (!id) {
+        res.status(500).end()
+        return 
+    } 
+
+    const user = await client.user.findFirst({
+        where: {
+            id: parseInt(id)
+        },
+        include: {
+            session: true
+        }
+    })
+
+    if (!user) {
+        res.status(404).end()
+        return
+    }
+
+    res.status(200).json(user)
+    
+}
 
 const createUserHandler = async (req, res, next) => {
     
@@ -83,5 +109,5 @@ const deleteUserHandler = async (req, res, next) => {
 
 
 module.exports = {
-    getUsersHandler, createUserHandler, updateUserHandler, deleteUserHandler
+    getUsersHandler, getUserHandler, createUserHandler, updateUserHandler, deleteUserHandler
 }

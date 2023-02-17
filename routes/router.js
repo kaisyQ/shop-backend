@@ -12,7 +12,7 @@ const { signinHandler, getMeHandler, logoutHandler } = require('./auth-handler')
 
 // import users handlers
 
-const { getUsersHandler, createUserHandler, updateUserHandler, deleteUserHandler } = require('./users-handler')
+const { getUsersHandler, getUserHandler, createUserHandler, updateUserHandler, deleteUserHandler } = require('./users-handler')
 
 // auth-routes
 
@@ -26,6 +26,7 @@ router.delete('/logout', logoutHandler)
 
 
 router.get('/users', checkMeHandler, checkAdminHandler, getUsersHandler)
+router.get('/users/:id', checkMeHandler, checkAdminHandler, getUserHandler)
 router.post('/user', checkMeHandler,checkAdminHandler, createUserHandler)
 router.put('/user', checkMeHandler, checkAdminHandler, updateUserHandler)
 router.delete('/user',checkMeHandler, checkAdminHandler, deleteUserHandler)
