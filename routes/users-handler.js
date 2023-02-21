@@ -45,12 +45,12 @@ const getUserHandler = async(req, res) => {
 const createUserHandler = async (req, res, next) => {
     
     const { login, password } = req.body
-
+    
     const created = await client.user.create({
         data: {
             login: login,
-            password: password, 
-            roleId: 1
+            password: password,
+            roleId: 2
         }
     })
 
@@ -59,7 +59,7 @@ const createUserHandler = async (req, res, next) => {
         return
     }
 
-    res.status(200)
+    res.status(200).json(created)
     
     return next()
     

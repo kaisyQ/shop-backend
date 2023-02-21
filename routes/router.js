@@ -2,7 +2,7 @@ const express = require('express')
 
 const router = express.Router()
 
-//import check-me handler 
+// import check-me handlers
 
 const { checkMeHandler, checkAdminHandler } = require('./check-handlers')
 
@@ -13,6 +13,10 @@ const { signinHandler, getMeHandler, logoutHandler } = require('./auth-handler')
 // import users handlers
 
 const { getUsersHandler, getUserHandler, createUserHandler, updateUserHandler, deleteUserHandler } = require('./users-handler')
+
+// import session handlers
+
+const { deleteSessionByIdHandler, deleteAllUserSessionsHandler } = require('./session-handler')
 
 // auth-routes
 
@@ -31,4 +35,11 @@ router.post('/user', checkMeHandler,checkAdminHandler, createUserHandler)
 router.put('/user', checkMeHandler, checkAdminHandler, updateUserHandler)
 router.delete('/user',checkMeHandler, checkAdminHandler, deleteUserHandler)
 
+
+// session-routes
+
+
+router.delete('/session/:id', checkMeHandler, checkAdminHandler, deleteSessionByIdHandler)
+router.delete('/sessions/:userId', checkMeHandler, checkAdminHandler, deleteAllUserSessionsHandler)
+ 
 module.exports = router
